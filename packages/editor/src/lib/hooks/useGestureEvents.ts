@@ -146,7 +146,6 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 			pinchState = 'not sure'
 
 			const { event, origin, da } = gesture
-			const container = editor.getContainer().getBoundingClientRect()
 
 			if (event instanceof WheelEvent) return
 			if (!(event.target === elm || elm?.contains(event.target as Node))) return
@@ -161,7 +160,7 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 			editor.dispatch({
 				type: 'pinch',
 				name: 'pinch_start',
-				point: { x: origin[0] - container.left, y: origin[1] - container.top, z: editor.getZoomLevel() },
+				point: { x: origin[0], y: origin[1], z: editor.getZoomLevel() },
 				delta: { x: 0, y: 0 },
 				shiftKey: event.shiftKey,
 				altKey: event.altKey,
@@ -231,7 +230,6 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 
 			const dx = origin[0] - prevPointBetweenFingers.x
 			const dy = origin[1] - prevPointBetweenFingers.y
-			const container = editor.getContainer().getBoundingClientRect()
 
 			prevPointBetweenFingers.x = origin[0]
 			prevPointBetweenFingers.y = origin[1]
@@ -245,7 +243,7 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 					editor.dispatch({
 						type: 'pinch',
 						name: 'pinch',
-						point: { x: origin[0] - container.left, y: origin[1] - container.top, z: currZoom },
+						point: { x: origin[0], y: origin[1], z: currZoom },
 						delta: { x: dx, y: dy },
 						shiftKey: event.shiftKey,
 						altKey: event.altKey,
@@ -276,7 +274,6 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 			if (!(event.target === elm || elm?.contains(event.target as Node))) return
 
 			const scale = offset[0]
-			const container = editor.getContainer().getBoundingClientRect()
 
 			pinchState = 'not sure'
 
@@ -284,8 +281,8 @@ export function useGestureEvents(ref: React.RefObject<HTMLDivElement>) {
 				editor.dispatch({
 					type: 'pinch',
 					name: 'pinch_end',
-					point: { x: origin[0] - container.left, y: origin[1] - container.top, z: scale },
-					delta: { x: origin[0] - container.left, y: origin[1] - container.top },
+					point: { x: origin[0], y: origin[1], z: scale },
+					delta: { x: origin[0], y: origin[1] },
 					shiftKey: event.shiftKey,
 					altKey: event.altKey,
 					ctrlKey: event.metaKey || event.ctrlKey,
