@@ -14,6 +14,7 @@ export type TLTypeFace = {
 
 export type TLTypeFaces = {
 	draw: TLTypeFace
+	drawJapanese?: TLTypeFace
 	monospace: TLTypeFace
 	serif: TLTypeFace
 	sansSerif: TLTypeFace
@@ -25,10 +26,15 @@ enum PreloadStatus {
 	WAITING,
 }
 
-const usePreloadFont = (id: string, font: TLTypeFace): PreloadStatus => {
+const usePreloadFont = (id: string, font: TLTypeFace | undefined): PreloadStatus => {
 	const [state, setState] = useState<PreloadStatus>(PreloadStatus.WAITING)
 
 	useEffect(() => {
+		if (!font) {
+			setState(PreloadStatus.SUCCESS)
+			return
+		}
+
 		const {
 			url,
 			style = 'normal',
@@ -50,7 +56,6 @@ const usePreloadFont = (id: string, font: TLTypeFace): PreloadStatus => {
 			featureSettings,
 			stretch,
 			unicodeRange,
-			// @ts-expect-error
 			variant,
 		}
 
@@ -79,6 +84,7 @@ const usePreloadFont = (id: string, font: TLTypeFace): PreloadStatus => {
 	font-stretch: ${fontInstance.stretch};
 	font-weight: ${fontInstance.weight};
 	font-style: ${fontInstance.style};
+	unicode-range: ${fontInstance.unicodeRange};
 	src: url("${url}") format("woff2")
 }`
 
@@ -91,9 +97,23 @@ const usePreloadFont = (id: string, font: TLTypeFace): PreloadStatus => {
 	return state
 }
 
-function getTypefaces(assetUrls: TLEditorAssetUrls) {
+function getTypefaces(assetUrls: TLEditorAssetUrls): TLTypeFaces {
+	const drawJapanese = assetUrls.fonts.drawJapanese
 	return {
-		draw: { url: assetUrls.fonts.draw },
+		draw: {
+			url: assetUrls.fonts.draw,
+			...(drawJapanese && {
+				unicodeRange:
+					'U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000',
+			}),
+		},
+		drawJapanese: drawJapanese
+			? {
+					url: drawJapanese,
+					unicodeRange:
+						'U+4E00-9FFF, U+3000-303F, U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+FF00-FFEF',
+			  }
+			: undefined,
 		serif: { url: assetUrls.fonts.serif },
 		sansSerif: { url: assetUrls.fonts.sansSerif },
 		monospace: { url: assetUrls.fonts.monospace },
@@ -107,6 +127,7 @@ export function usePreloadAssets(assetUrls: TLEditorAssetUrls) {
 
 	const results = [
 		usePreloadFont('tldraw_draw', typefaces.draw),
+		usePreloadFont('tldraw_draw', typefaces.drawJapanese),
 		usePreloadFont('tldraw_serif', typefaces.serif),
 		usePreloadFont('tldraw_sans', typefaces.sansSerif),
 		usePreloadFont('tldraw_mono', typefaces.monospace),

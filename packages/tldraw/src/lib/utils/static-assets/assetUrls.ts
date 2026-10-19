@@ -9,6 +9,8 @@ export type TLEditorAssetUrls = {
 		serif: string
 		sansSerif: string
 		draw: string
+		/** Optional Japanese face registered alongside draw, using separate Unicode ranges. */
+		drawJapanese?: string
 	}
 }
 
