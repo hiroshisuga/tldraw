@@ -1,9 +1,20 @@
-# Ignored Files for Search
-
 dist
-node_modules
+.tsbuild-dev
+.tsbuild-pub
+.tsbuild
+node\*modules
 *.d.ts
-*.js
 *.md
-*.lock
-*.tsbuildinfo
+**/_archive
+**/*.tsbuildinfo
+yarn.lock
+**/*.tldr
+**/*.d.ts
+**/*.d.ts.map
+**/*.js.map
+**/*.css.map
+apps/example/www/index.css
+**/dist/*
+*.cjs
+
+packages/tldraw/tldraw.css

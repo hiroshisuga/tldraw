@@ -1,0 +1,53 @@
+{
+	"name": "@bigbluebutton/assets",
+	"description": "BigBlueButton's fork of tldraw 2.0-alpha.19 - A tiny little drawing app (assets).",
+	"version": "2.0.0-alpha.36",
+	"author": {
+		"name": "tldraw GB Ltd.",
+		"email": "hello@tldraw.com"
+	},
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bigbluebutton/tldraw.git"
+	},
+	"bugs": {
+		"url": "https://github.com/bigbluebutton/tldraw/issues"
+	},
+	"files": [
+		"embed-icons",
+		"icons",
+		"fonts",
+		"translations",
+		"imports.js",
+		"imports.d.ts",
+		"selfHosted.js",
+		"selfHosted.d.ts",
+		"types.d.ts",
+		"urls.js",
+		"urls.d.ts",
+		"utils.js",
+		"utils.d.ts"
+	],
+	"scripts": {
+		"pack-tarball": "yarn pack",
+		"lint": "yarn run -T tsx ../../scripts/lint.ts"
+	},
+	"dependencies": {
+		"@bigbluebutton/utils": "2.0.0-alpha.36"
+	},
+	"devDependencies": {
+		"lazyrepo": "0.0.0-alpha.27",
+		"ts-node-dev": "^1.1.8"
+	},
+	"jest": {
+		"preset": "config/jest/node",
+		"setupFiles": [
+			"raf/polyfill"
+		],
+		"moduleNameMapper": {
+			"^~(.*)": "<rootDir>/src/$1"
+		}
+	},
+	"stableVersion": "2.0.0-alpha.20"
+}

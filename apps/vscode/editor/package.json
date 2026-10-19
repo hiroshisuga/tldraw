@@ -1,35 +1,45 @@
 {
-  "name": "@tldraw/vscode-editor",
-  "version": "1.12.0",
-  "private": true,
-  "description": "An an editor for the tldraw vscode extension.",
-  "author": "@steveruizok",
-  "license": "MIT",
-  "keywords": [
-    "react",
-    "typescript",
-    "esbuild"
-  ],
-  "scripts": {
-    "dev": "node scripts/dev.mjs -w",
-    "build": "node scripts/build.mjs",
-    "lint": "TIMING=1 eslint src/ --ext .ts,.tsx",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
-  },
-  "devDependencies": {
-    "@tldraw/tldraw": "*",
-    "@types/node": "^17.0.14",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "@types/react-router-dom": "^5.1.8",
-    "concurrently": "7.0.0",
-    "create-serve": "1.0.1",
-    "esbuild": "^0.14.54",
-    "esbuild-serve": "^1.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tslib": "^2.4.0",
-    "typescript": "^4.7.3"
-  },
-  "gitHead": "a7dac0f83ad998e205c2aab58182cb4ba4e099a6"
+	"name": "@bigbluebutton/vscode-editor",
+	"description": "BigBlueButton's fork of tldraw 2.0-alpha.19 - An editor for the tldraw vscode extension.",
+	"version": "2.0.0-alpha.36",
+	"private": true,
+	"packageManager": "yarn@3.5.0",
+	"author": {
+		"name": "tldraw GB Ltd.",
+		"email": "hello@tldraw.com"
+	},
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bigbluebutton/tldraw"
+	},
+	"bugs": {
+		"url": "https://github.com/bigbluebutton/tldraw/issues"
+	},
+	"scripts": {
+		"build": "yarn run -T tsx scripts/build.ts",
+		"dev": "yarn run -T tsx scripts/dev.ts",
+		"clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+		"lint": "yarn run -T tsx ../../../scripts/lint.ts"
+	},
+	"devDependencies": {
+		"@bigbluebutton/assets": "2.0.0-alpha.36",
+		"@bigbluebutton/tldraw": "2.0.0-alpha.36",
+		"@types/fs-extra": "^11.0.1",
+		"@types/node": "^17.0.14",
+		"@types/react": "^18.0.24",
+		"@types/react-dom": "^18.0.6",
+		"@types/react-router-dom": "^5.1.8",
+		"concurrently": "7.0.0",
+		"create-serve": "1.0.1",
+		"dotenv": "^16.0.3",
+		"esbuild": "^0.25.0",
+		"fs-extra": "^11.1.0",
+		"lazyrepo": "0.0.0-alpha.27",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"tslib": "^2.4.0"
+	},
+	"gitHead": "a7dac0f83ad998e205c2aab58182cb4ba4e099a6",
+	"stableVersion": "2.0.0-alpha.20"
 }

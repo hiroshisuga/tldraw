@@ -1,74 +1,146 @@
 {
-  "name": "@tldraw/monorepo",
-  "private": true,
-  "version": "1.6.2",
-  "description": "A tiny little drawing app.",
-  "author": "@steveruizok",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tldraw/tldraw.git"
-  },
-  "license": "MIT",
-  "workspaces": [
-    "packages/*",
-    "apps/*",
-    "apps/vscode/*",
-    "examples/*"
-  ],
-  "scripts": {
-    "build": "turbo run build",
-    "build:www": "turbo run build --filter=@tldraw/www",
-    "build:core": "turbo run build --filter=@tldraw/core-example*",
-    "build:packages": "turbo run build --filter=./packages/*",
-    "build:apps": "turbo run build --filter=./apps/**",
-    "start": "turbo run dev --filter=@tldraw/tldraw-example... --parallel",
-    "start:core": "turbo run dev --filter=@tldraw/core-example-advanced*... --parallel",
-    "start:www": "turbo run dev --filter=@tldraw/www... --parallel",
-    "start:vscode": "code apps/vscode/extension & turbo run dev --filter=./apps/vscode/*... --parallel",
-    "start:extension": "turbo run dev --filter=@tldraw/new-tab-extension... --parallel",
-    "package:vscode": "turbo run package --filter=tldraw-vscode",
-    "publish:vscode": "turbo run publish --filter=tldraw-vscode",
-    "serve:www": "turbo run start --filter=@tldraw/www",
-    "version": "changeset version",
-    "changeset": "changeset",
-    "test": "turbo run test",
-    "test:ci": "turbo run test:ci",
-    "test:watch": "turbo run test:watch",
-    "format": "prettier --write .",
-    "lint": "turbo run lint --parallel",
-    "clean": "turbo run clean",
-    "postinstall": "husky install",
-    "pre-commit": "lint-staged",
-    "pre-push": "yarn test"
-  },
-  "devDependencies": {
-    "@ggallon/prettier-plugin-sort-imports": "^3.4.2-canary.0",
-    "@swc-node/jest": "^1.4.3",
-    "@tldraw/lfg": "latest",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.14",
-    "@types/vscode": "^1.63.2",
-    "@typescript-eslint/eslint-plugin": "^5.17.0",
-    "@typescript-eslint/parser": "^5.17.0",
-    "eslint": "^8.20.0",
-    "eslint-plugin-jest": "^26.8.2",
-    "fake-indexeddb": "^3.1.7",
-    "husky": "^7.0.4",
-    "init-package-json": "^2.0.5",
-    "jest": "^27.4.7",
-    "lint-staged": "^12.3.3",
-    "prettier": "^2.7.1",
-    "resize-observer-polyfill": "^1.5.1",
-    "source-map-loader": "^3.0.1",
-    "tslib": "^2.4.0",
-    "turbo": "^1.3.4",
-    "typescript": "^4.7.3",
-    "webpack": "^5.68.0",
-    "@changesets/cli": "^2.20.0"
-  },
-  "lint-staged": {
-    "*": "prettier --ignore-unknown --write",
-    "*.{ts,tsx}": "eslint --fix"
-  },
-  "packageManager": "yarn@1.22.17"
+	"name": "@bigbluebutton/monorepo",
+	"description": "BigBlueButton's fork of tldraw 2.0-alpha.19 - A tiny little drawing app (monorepo)",
+	"version": "2.0.0-alpha.36",
+	"private": true,
+	"author": {
+		"name": "tldraw GB Ltd.",
+		"email": "hello@tldraw.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bigbluebutton/tldraw"
+	},
+	"bugs": {
+		"url": "https://github.com/bigbluebutton/tldraw/issues"
+	},
+	"license": "Apache-2.0",
+	"workspaces": [
+		"apps/*",
+		"packages/*",
+		"apps/vscode/*",
+		"e2e",
+		"config",
+		"scripts"
+	],
+	"scripts": {
+		"clean": "scripts/clean.sh",
+		"postinstall": "husky install && yarn refresh-assets",
+		"refresh-assets": "lazy refresh-assets",
+		"build": "lazy build",
+		"dev": "lazy run dev --filter='{,bublic/}apps/examples' --filter='{,bublic/}packages/tldraw'",
+		"dev-vscode": "code ./apps/vscode/extension && lazy run dev --filter='{,bublic/}apps/vscode/{extension,editor}'",
+		"build-types": "lazy inherit",
+		"build-api": "lazy build-api",
+		"build-package": "lazy build-package",
+		"lint": "lazy lint",
+		"format": "prettier --write --cache \"**/*.{ts,tsx,js,jsx,json}\"",
+		"typecheck": "yarn refresh-assets && tsx scripts/typecheck.ts",
+		"check-scripts": "tsx scripts/check-scripts.ts",
+		"api-check": "lazy api-check",
+		"test": "lazy test -- -u",
+		"e2e": "lazy e2e --filter='{,bublic/}apps/examples'",
+		"dev-bbb": "tsx scripts/tldraw-dev.ts"
+	},
+	"engines": {
+		"npm": ">=7.0.0"
+	},
+	"packageManager": "yarn@3.5.0",
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json}": [
+			"prettier --write --cache"
+		]
+	},
+	"devDependencies": {
+		"@microsoft/api-extractor": "^7.35.4",
+		"@next/eslint-plugin-next": "^13.3.0",
+		"@swc/core": "^1.3.55",
+		"@swc/jest": "^0.2.26",
+		"@types/glob": "^8.1.0",
+		"@types/jest": "^29",
+		"@types/node": "18.7.3",
+		"@types/prettier": "2.7.0",
+		"@types/react": "^18.0.24",
+		"@types/react-dom": "^18.0.6",
+		"@typescript-eslint/eslint-plugin": "^5.57.0",
+		"@typescript-eslint/parser": "^5.57.0",
+		"auto": "^10.46.0",
+		"eslint": "^8.37.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-deprecation": "^2.0.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-local": "^1.0.0",
+		"eslint-plugin-no-only-tests": "^3.1.0",
+		"eslint-plugin-react": "^7.32.2",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"fs-extra": "^11.1.0",
+		"husky": "^8.0.0",
+		"jest": "^29",
+		"json5": "^2.2.3",
+		"lazyrepo": "0.0.0-alpha.27",
+		"lint-staged": ">=10",
+		"playwright": "^1.55.1",
+		"prettier": "^2.8.6",
+		"prettier-plugin-organize-imports": "^3.2.2",
+		"rimraf": "^4.4.0",
+		"ts-node": "^10.9.2",
+		"tsx": "4.17.0",
+		"typescript": "^5.0.2",
+		"vercel": "^28.16.15"
+	},
+	"resolutions": {
+		"@microsoft/api-extractor@^7.35.4": "patch:@microsoft/api-extractor@npm%3A7.35.4#./.yarn/patches/@microsoft-api-extractor-npm-7.35.4-5f4f0357b4.patch",
+		"proxy-agent": "^6.0.0",
+		"mocha/nanoid": "^3.3.16",
+		"postcss/nanoid": "^3.3.16",
+		"socks": ">=2.8.9",
+		"jsdom/http-proxy-agent": "^7.0.0",
+		"@remix-run/server-runtime": ">=2.17.3",
+		"rollup": ">=4.59.0 <5.0.0",
+		"nanoid@^5.0.9": "5.1.16"
+	},
+	"overrides": {
+		"vm2": "3.11.3",
+		"form-data": "4.0.5",
+		"ws": ">=8.17.1",
+		"@remix-run/dev": {
+			"ws": ">=7.5.10 <8.0.0"
+		},
+		"jsdom": {
+			"http-proxy-agent": "^7.0.0"
+		},
+		"body-parser": ">=1.20.3 <2.0.0",
+		"rollup": ">=4.59.0 <5.0.0",
+		"cross-spawn": ">=7.0.5",
+		"tar-fs": ">=2.1.4",
+		"validator": ">=13.15.22",
+		"@remix-run/router": ">=1.23.2",
+		"flatted": ">=3.4.2",
+		"lodash": ">=4.18.0",
+		"@babel/plugin-transform-modules-systemjs": ">=7.29.4",
+		"micromatch": ">=4.0.8",
+		"xml2js": "0.5.0",
+		"@babel/helpers": ">=7.26.0",
+		"@babel/runtime": ">=7.26.0",
+		"postcss": ">=8.5.10",
+		"yaml": ">=2.8.3",
+		"cookie": ">=0.7.0 <1.0.0",
+		"js-yaml": ">=4.1.1 <5",
+		"qs": ">=6.14.2",
+		"express": ">=4.19.3 <5.0.0",
+		"send": ">=0.19.0 <1.0.0",
+		"serve-static": ">=1.16.0 <2.0.0",
+		"tar": ">=7.5.4",
+		"socks": ">=2.8.9",
+		"estree-util-value-to-estree": ">=3.3.3",
+		"@remix-run/server-runtime": ">=2.17.3",
+		"esbuild": ">=0.25.0"
+	},
+	"dependencies": {
+		"node-gyp": "^10.2.0",
+		"recharts": "2.15.1",
+		"styled-components": "^6.1.13",
+		"svgo": "^3.3.3"
+	},
+	"stableVersion": "2.0.1"
 }

@@ -1,20 +1,27 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "outDir": "dist",
-    "lib": ["es6", "WebWorker"],
-    "sourceMap": true,
-    "rootDir": "src",
-    "strict": true,
-    "paths": {
-      "@tldraw/tldraw": ["../../../packages/tldraw"]
-    }
-  },
-  "references": [
-    {
-      "path": "../../../packages/tldraw"
-    }
-  ],
-  "exclude": ["node_modules", ".vscode-test-web"]
+	"compilerOptions": {
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"removeComments": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"incremental": true,
+		"baseUrl": ".",
+		"composite": true,
+		"importHelpers": false,
+		"skipDefaultLibCheck": true,
+		"experimentalDecorators": true
+	},
+	"include": ["src", "../messages", "scripts"],
+	"references": [{ "path": "../../../packages/tldraw" }]
 }

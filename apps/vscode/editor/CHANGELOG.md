@@ -1,4 +1,23 @@
-# @tldraw/vscode-editor
+# @bigbluebutton/vscode-editor
+
+## 1.13.1-alpha.0
+
+### Patch Changes
+
+- Release day!
+
+## 1.13.0
+
+### Minor Changes
+
+- - Adds missing Arabic translations for dialogs. @abedshamia
+  - Updates core-example. @brydenfogelman
+  - Updates Polish translations. @adan2013
+  - Adds missing Aria-Labels. @KDSBrowne
+  - Improves Japanese translation. @yashkumarbarot
+  - Fixes height and width in app.viewport. @hiroshisuga
+  - Improves labels on StlyeMenu @proke03
+  - Adds missing tooltips to undo / redo buttons. @proke03
 
 ## 1.12.0
 

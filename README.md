@@ -1,70 +1,76 @@
-<div style="text-align: center; transform: scale(.5);">
-  <img src="https://github.com/tldraw/tldraw/raw/main/assets/card-repo.png"/>
+<div alt style="text-align: center; transform: scale(.5);">
+	<picture>
+		<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/tldraw/tldraw/main/assets/github-hero-dark-draw.png" />
+		<img alt="tldraw" src="https://raw.githubusercontent.com/tldraw/tldraw/main/assets/github-hero-light-draw.png" />
+	</picture>
 </div>
 
-![A screenshot of the tldraw web app](./assets/screenshot.png)
+# tldraw
 
-Welcome to the [tldraw](https://tldraw.com) monorepo.
+Welcome to BigBlueButton's fork of [tldraw](https://tldraw.com), a collaborative digital whiteboard.
 
-🙌 Questions? Join the [Discord channel](https://discord.gg/SBBEVCA4PG) or start a [discussion](https://github.com/tldraw/tldraw/discussions/new).
+## Installation & Usage
 
-💕 Love this project? Consider [becoming a sponsor](https://github.com/sponsors/steveruizok?frequency=recurring&sponsor=steveruizok).
+```tsx
+import { Tldraw } from '@bigbluebutton/tldraw'
+import '@bigbluebutton/tldraw/tldraw.css'
 
-Thanks to our corporate sponsors:
+export default function () {
+	return (
+		<div style={{ position: 'fixed', inset: 0 }}>
+			<Tldraw />
+		</div>
+	)
+}
+```
 
-<div style="display: flex; flex-wrap: wrap; gap: 32px;">
-<a href="https://sentry.io"><img src="./assets/sentry.svg"></img></a>
+## Local development
 
-<a href="https://vercel.com/?utm_source=team-slug&utm_campaign=oss"><img src="./assets/vercel.svg"></img></a>
+To run the local development server, first clone this repo.
 
-<a href="https://oppizi.com"><img src="./assets/oppizi.png" width="212"></img></a>
+Install dependencies:
 
-<a href="https://logseq.com"><img src="./assets/logseq.svg" width="80"></img></a>
+```bash
+yarn
+```
 
-<a href="https://blindsidenetworks.com/"><img src="./assets/blindside.png" width="212"></img></a>
+Start the local development server:
 
-<a href="https://www.100ms.live/"><img src="./assets/100ms.png" width="212"></img></a>
+```bash
+yarn dev
+```
 
-</div>
+Open the example project at `localhost:5420`.
 
-...and to our [individual sponsors](https://github.com/sponsors/steveruizok#sponsors)!
+## About this repository
 
-## Contents
+### Top-level layout
 
-This repository is a monorepo containing two packages:
+This repository's contents is divided across four primary sections:
 
-- [**packages/tldraw**](https://github.com/tldraw/tldraw/tree/main/packages/tldraw) contains the source for the [@tldraw/tldraw](https://www.npmjs.com/package/@tldraw/tldraw) package. This is an editor as a React component named `<Tldraw>`. You can use this package to embed the tldraw editor in any React application.
-- [**packages/core**](https://github.com/tldraw/tldraw/tree/main/packages/core) contains the source for the [@tldraw/core](https://www.npmjs.com/package/@tldraw/core) package. This is a renderer for React components in a canvas-style UI. It is used by `@tldraw/tldraw` as well as several other projects.
+- `/apps` contains the source for our applications
+- `/packages` contains the source for our public packages
+- `/scripts` contains scripts used for building and publishing
+- `/assets` contains icons and translations relied on by the app
+- `/docs` contains the content for the docs site at [tldraw.dev](https://tldraw.dev)
 
-...and two apps:
+### Packages
 
-- [**apps/www**](https://github.com/tldraw/tldraw/tree/main/apps/www) contains the source for the [tldraw.com](https://tldraw.com) website.
-- [**apps/vscode**](https://github.com/tldraw/tldraw/tree/main/apps/vscode) contains the source for the [tldraw VS Code extension](https://marketplace.visualstudio.com/items?itemName=tldraw-org.tldraw-vscode).
-
-...and three examples:
-
-- [**examples/core-example**](https://github.com/tldraw/tldraw/tree/main/examples/core-example) is a simple example for `@tldraw/core`.
-- [**examples/core-example-advanced**](https://github.com/tldraw/tldraw/tree/main/examples/core-example-advanced) is a second example for `@tldraw/core`.
-- [**examples/tldraw-example**](https://github.com/tldraw/tldraw/tree/main/examples/tldraw-example) is an example for `@tldraw/tldraw`.
-
-## Discussion
-
-Want to connect? Visit the [Discord channel](https://discord.gg/SBBEVCA4PG).
-
-## Contribution
-
-Interested in contributing? See the [contributing guide](/CONTRIBUTING.md).
-
-## Support
-
-Need help? Please [open an issue](https://github.com/tldraw/tldraw/issues/new) for support.
+- `assets`: a library for working with tldraw's fonts and translations
+- `editor`: the tldraw editor
+- `state`: a signals library, also known as signia
+- `store`: an in-memory reactive database
+- `tldraw`: the main tldraw package containing both the editor and the UI
+- `tlschema`: shape definitions and migrations
+- `utils`: low-level data utilities shared by other libraries
+- `validate`: a validation library used for run-time validation
 
 ## License
 
-This project is licensed under MIT.
+Previous versions of Tldraw's SDK were released under the permissive Apache-2.0 license.
 
-If you're using the library in a commercial product, please consider [becoming a sponsor](https://github.com/sponsors/steveruizok?frequency=recurring&sponsor=steveruizok).
+On December 20th, 2023, Tldraw announced a new license in which only non-commercial uses of Tldraw are permitted without purchasing a commercial license.
 
-## Author
+As a result, we decided to ship BigBlueButton with the last 2.x pre-release version that remains licensed under Apache-2.0, i.e., [v2.0.0-alpha.19](https://github.com/tldraw/tldraw/releases/tag/v2.0.0-alpha.19).
 
-- [@steveruizok](https://twitter.com/steveruizok)
+The blog post announcing the change can be found [here](https://tldraw.substack.com/p/license-updates-for-the-tldraw-sdk).
